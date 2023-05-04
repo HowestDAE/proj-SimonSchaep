@@ -7,11 +7,23 @@ using System.Threading.Tasks;
 
 namespace ToolDevProject.WPF.Model
 {
-    public class Hero
+    public abstract class BaseHero
     {
+        [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
 
         [JsonProperty(PropertyName = "localized_name")]
         public string Name { get; set; }
+    }
+
+    public class MeleeHero : BaseHero
+    {
+        
+    }
+
+    public class RangedHero : BaseHero
+    {
+        [JsonProperty(PropertyName = "projectile_speed")]
+        public int ProjectileSpeed { get; set; }
     }
 }
