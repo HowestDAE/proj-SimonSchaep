@@ -90,6 +90,8 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\DataFiles\HeroStats.json" />
+    <None Include="Resources\DataFiles\HeroStatsLite.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
