@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToolDevProject.WPF.Repository;
 
 namespace ToolDevProject.WPF
 {
@@ -23,6 +24,10 @@ namespace ToolDevProject.WPF
         public MainWindow()
         {
             InitializeComponent();
+
+            var heroStats = LocalRepository.GetHeroStats();
+
+
         }
     }
 }
