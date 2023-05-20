@@ -2,9 +2,11 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -40,6 +42,68 @@ namespace ToolDevProject.WPF.Repository
             }
 
             return _heroes;
+        }
+
+        public List<BaseHero> GetHeroes(string attribute, string role, string nameContains)
+        {
+            List<BaseHero> filteredHeroes = new List<BaseHero>();
+
+            foreach (BaseHero hero in _heroes)
+            {
+                if ((attribute == "" || attribute == "all" || hero.PrimaryAttribute == attribute) &&
+                    (role == "" || role == "all" || hero.Roles.Contains(role)) &&
+                    (nameContains == "" || hero.Name.Contains(nameContains)))
+                {
+                    filteredHeroes.Add(hero);
+                }
+            }
+
+            return filteredHeroes;
+        }
+
+        public async Task<List<string>> GetAttributes()
+        {
+            if(_heroes == null)
+            {
+                await GetHeroes();
+            }
+
+            List<string> attributes = new List<string>();
+
+            foreach (BaseHero hero in _heroes)
+            {
+                if (!attributes.Contains(hero.PrimaryAttribute))
+                {
+                    attributes.Add(hero.PrimaryAttribute);
+                }
+            }
+
+            attributes.Add("all");
+            return attributes;
+        }
+
+        public async Task<List<string>> GetRoles()
+        {
+            if (_heroes == null)
+            {
+                await GetHeroes();
+            }
+
+            List<string> roles = new List<string>();
+
+            foreach (BaseHero hero in _heroes)
+            {
+                foreach(string role in hero.Roles)
+                {
+                    if (!roles.Contains(role))
+                    {
+                        roles.Add(role);
+                    }
+                }
+            }
+
+            roles.Add("all");
+            return roles;
         }
 
         private Type GetHeroType(string attackType)

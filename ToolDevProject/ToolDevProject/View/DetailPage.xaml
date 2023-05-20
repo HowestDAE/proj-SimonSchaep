@@ -14,8 +14,13 @@
         <viewmodel:DetailPageVM/>
     </Page.DataContext>
 
+    
     <Grid Background="Black">
         <Image Source="../Resources/Images/OverviewBackground.png"/>
+        <Button Command="{Binding BackCommand}"
+                Content="BACK" FontWeight="Bold" Background="Black" Foreground="DarkRed"
+                Margin="10,10,10,10"
+                HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

@@ -15,8 +15,19 @@
     </Page.DataContext>
 
     <Grid Background="Black">
-        <Image Source="../Resources/Images/OverviewBackground.png"/>
-        <ListBox Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Image Grid.ColumnSpan="3" Grid.RowSpan="2" Source="../Resources/Images/OverviewBackground.png"/>
+        <ComboBox Grid.Column="0" ItemsSource="{Binding Attributes}" SelectedItem="{Binding SelectedAttribute}"/>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}"/>
+        <ListBox Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
@@ -39,9 +50,10 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button VerticalAlignment="Bottom"
-                Command="{Binding SwitchRepositoryCommand}"
-                Content="{Binding SwitchRepoText}"/>
+        <Button Grid.Row="1" Grid.ColumnSpan="3"
+            VerticalAlignment="Bottom"
+            Command="{Binding SwitchRepositoryCommand}"
+            Content="{Binding SwitchRepoText}"/>
     </Grid>
 
     <!--<ListBox Grid.Row="1" Foreground="White" Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}">

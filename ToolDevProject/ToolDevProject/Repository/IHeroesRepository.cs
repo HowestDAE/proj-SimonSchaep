@@ -10,5 +10,8 @@ namespace ToolDevProject.WPF.Repository
     public interface IHeroesRepository
     {
         Task<List<BaseHero>> GetHeroes();
+        Task<List<string>> GetAttributes();
+        Task<List<string>> GetRoles();
+        List<BaseHero> GetHeroes(string attribute, string role, string nameContains);
     }
 }

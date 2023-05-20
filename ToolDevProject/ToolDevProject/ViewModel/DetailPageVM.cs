@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,10 @@ namespace ToolDevProject.WPF.ViewModel
 {
     internal class DetailPageVM : ObservableObject
     {
+        //refs to other VMs
+        public MainViewModel MainVM { get; set; }
+
+        //data
         public int CurrentHeroLevel
         {
             get { return CurrentHero.Level; }
@@ -24,7 +29,6 @@ namespace ToolDevProject.WPF.ViewModel
             }
         }
 
-
         private BaseHero _currentHero;
         public BaseHero CurrentHero
         {
@@ -32,6 +36,7 @@ namespace ToolDevProject.WPF.ViewModel
             set
             {
                 _currentHero = value;
+                OnPropertyChanged(nameof(CurrentHeroLevel));
                 OnPropertyChanged(nameof(CurrentHero));
                 OnPropertyChanged(nameof(CurrentMeleeHero));
                 OnPropertyChanged(nameof(CurrentRangedHero));
@@ -48,9 +53,20 @@ namespace ToolDevProject.WPF.ViewModel
             get { return _currentHero as RangedHero; }
         }
 
+
+        //back command
+        public RelayCommand BackCommand { get; set; }
+
+        public void Back()
+        {
+            MainVM.SwitchPage();
+        }
+
+        //constructor
         public DetailPageVM()
         {
             CurrentHero = new MeleeHero();
+            BackCommand = new RelayCommand(Back);
         }
     }
 }

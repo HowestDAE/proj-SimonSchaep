@@ -56,6 +56,68 @@ namespace ToolDevProject.WPF.ViewModel
             }
         }
 
+        private List<string> _roles;
+        public List<string> Roles
+        {
+            get
+            {
+                return _roles;
+            }
+            set
+            {
+                _roles = value;
+                OnPropertyChanged(nameof(Roles));
+            }
+        }
+
+        private List<string> _attributes;
+        public List<string> Attributes
+        {
+            get
+            {
+                return _attributes;
+            }
+            set
+            {
+                _attributes = value;
+                OnPropertyChanged(nameof(Attributes));
+            }
+        }
+
+        //filters
+        private string _selectedAttribute = "all";
+        public string SelectedAttribute
+        {
+            get { return _selectedAttribute; }
+            set
+            {
+                _selectedAttribute = value;
+                UpdateFilters();
+            }
+        }
+
+        private string _selectedRole = "all";
+        public string SelectedRole
+        {
+            get { return _selectedRole; }
+            set
+            {
+                _selectedRole = value;
+                UpdateFilters();
+            }
+        }
+
+        private string _selectedNameContains = "";
+        public string SelectedNameContains
+        {
+            get { return _selectedNameContains; }
+            set
+            {
+                _selectedNameContains = value;
+                UpdateFilters();
+            }
+        }
+
         //Switch repo
         public string SwitchRepoText
         {
@@ -94,7 +156,7 @@ namespace ToolDevProject.WPF.ViewModel
             //{
             //    AttributesRepository = _localAttributesRepository;
             //}
-            //LoadAttributes();
+            //LoadAttributeStats();
 
             OnPropertyChanged(nameof(SwitchRepoText));
         }
@@ -115,6 +177,8 @@ namespace ToolDevProject.WPF.ViewModel
 
             LoadHeroes();
             LoadAttributes();
+            LoadRoles();
+            LoadAttributeStats();
         }
 
         //funcs
@@ -125,7 +189,22 @@ namespace ToolDevProject.WPF.ViewModel
 
         private async void LoadAttributes()
         {
+            Attributes = await HeroesRepository.GetAttributes();
+        }
+
+        private async void LoadRoles()
+        {
+            Roles = await HeroesRepository.GetRoles();
+        }
+
+        private async void LoadAttributeStats()
+        {
             await AttributesRepository.LoadAttributes();
+        }
+
+        private void UpdateFilters()
+        {
+            Heroes = HeroesRepository.GetHeroes(SelectedAttribute, SelectedRole, SelectedNameContains);
         }
     }
 }

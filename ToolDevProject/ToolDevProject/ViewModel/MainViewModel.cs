@@ -24,6 +24,7 @@ namespace ToolDevProject.WPF.ViewModel
             MainPage = new OverviewPage();
             (MainPage.DataContext as OverviewPageVM).MainVM = this;
             HeroPage = new DetailPage();
+            (HeroPage.DataContext as DetailPageVM).MainVM = this;
             CurrentPage = MainPage;
         }
 
