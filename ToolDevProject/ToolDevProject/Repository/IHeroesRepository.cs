@@ -7,7 +7,7 @@ using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository
 {
-    internal interface IRepository
+    public interface IHeroesRepository
     {
         Task<List<BaseHero>> GetHeroes();
     }

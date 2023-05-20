@@ -59,9 +59,13 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Hero.cs" />
-    <Compile Include="Repository\ApiRepository.cs" />
-    <Compile Include="Repository\LocalRepository.cs" />
-    <Compile Include="Repository\IRepository.cs" />
+    <Compile Include="Repository\AttributesApiRepository.cs" />
+    <Compile Include="Repository\AttributesLocalRepository.cs" />
+    <Compile Include="Repository\HeroesApiRepository.cs" />
+    <Compile Include="Repository\HeroesLocalRepository.cs" />
+    <Compile Include="Repository\IAttributesRepository.cs" />
+    <Compile Include="Repository\IHeroesRepository.cs" />
+    <Compile Include="ViewModel\OverviewPageVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -100,13 +104,13 @@
     </None>
     <EmbeddedResource Include="Resources\DataFiles\HeroStatsLite.json" />
     <EmbeddedResource Include="Resources\DataFiles\HeroStats.json" />
+    <None Include="Resources\DataFiles\Attributes.json" />
     <None Include="Resources\DataFiles\Heroes.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\" />
     <Folder Include="View\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

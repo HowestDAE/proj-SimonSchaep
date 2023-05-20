@@ -1,0 +1,18 @@
+﻿{
+  "strength": {
+    "health": 22,
+    "health_regen": 0.1
+  },
+  "agility": {
+    "armor": 0.167,
+    "attack_speed": 1
+  },
+  "intelligence": {
+    "mana": 12,
+    "mana_regen": 0.05,
+    "magic_resist": 0.1
+  },
+  "universal": {
+    "damage": 0.7
+  }
+}

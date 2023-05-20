@@ -10,7 +10,7 @@ using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository
 {
-    internal class ApiRepository : IRepository
+    internal class HeroesApiRepository : IHeroesRepository
     {
         private List<BaseHero> _heroes;
 

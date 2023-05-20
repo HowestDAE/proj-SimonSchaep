@@ -12,7 +12,7 @@ using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository
 {
-    internal class LocalRepository : IRepository
+    internal class HeroesLocalRepository : IHeroesRepository
     {
         private List<BaseHero> _heroes;
 
