@@ -12,35 +12,37 @@ using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository
 {
-    internal class LocalRepository
+    internal class LocalRepository : IRepository
     {
-        private static List<BaseHero> _heroStats;
+        private List<BaseHero> _heroes;
 
-        public static List<BaseHero> GetHeroStats()
+        public async Task<List<BaseHero>> GetHeroes()
         {
-            if (_heroStats == null)
+            if (_heroes == null)
             {
-                _heroStats = new List<BaseHero>();
+                _heroes = new List<BaseHero>();
 
                 var assembly = Assembly.GetExecutingAssembly();
-                var resourceName = "ToolDevProject.WPF.Resources.DataFiles.HeroStatsLite.json";
+                var resourceName = "ToolDevProject.WPF.Resources.DataFiles.Heroes.json";
 
                 Stream stream = assembly.GetManifestResourceStream(resourceName);
                 var reader = new StreamReader(stream);
                 string json = reader.ReadToEnd();
-                JArray array = JArray.Parse(json);
-                foreach (JToken token in array)
+                JObject obj = JObject.Parse(json); //it's actually an array, but doesn't have [], so I have to parse it as an object
+                foreach (JToken token in obj.Children())
                 {
-                    string attackType = token.SelectToken("attack_type").ToObject<string>();
+                    string attackType = token.First().SelectToken("attack_type").ToObject<string>();
                     Type heroType = GetHeroType(attackType);
-                    _heroStats.Add(token.ToObject(heroType) as BaseHero);
+                    _heroes.Add(token.First().ToObject(heroType) as BaseHero);
                 }                    
             }
 
-            return _heroStats;
+            await Task.Delay(1000);
+
+            return _heroes;
         }
 
-        private static Type GetHeroType(string attackType)
+        private Type GetHeroType(string attackType)
         {
             if(attackType == "Melee")
             {

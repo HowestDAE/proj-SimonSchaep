@@ -21,13 +21,21 @@ namespace ToolDevProject.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        private IRepository _repository;
+
         public MainWindow()
         {
             InitializeComponent();
 
-            var heroStats = LocalRepository.GetHeroStats();
+            //_repository = new LocalRepository();
+            _repository = new ApiRepository();
+            
+            LoadHeroes();
+        }
 
-
+        private async void LoadHeroes()
+        {
+            var heroes = await _repository.GetHeroes();
         }
     }
 }
