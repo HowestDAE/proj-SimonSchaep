@@ -117,8 +117,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return BaseHealthRegen +
-                    OverviewPageVM.AttributesRepository.StrengthHealthRegenGain * (BaseStrength + Level * StrengthGain);
+                return (float)(Math.Round(BaseHealthRegen +
+                    OverviewPageVM.AttributesRepository.StrengthHealthRegenGain * (BaseStrength + Level * StrengthGain), 1));
             }
         }
 
@@ -155,8 +155,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return BaseManaRegen +
-                    OverviewPageVM.AttributesRepository.IntelligenceManaRegenGain * (BaseIntelligence + Level * IntelligenceGain);
+                return (float)(Math.Round(BaseManaRegen +
+                    OverviewPageVM.AttributesRepository.IntelligenceManaRegenGain * (BaseIntelligence + Level * IntelligenceGain),1));
             }
         }
 

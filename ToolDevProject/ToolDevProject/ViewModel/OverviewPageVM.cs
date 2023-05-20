@@ -14,6 +14,9 @@ namespace ToolDevProject.WPF.ViewModel
 {
     internal class OverviewPageVM : ObservableObject
     {
+        //refs to other VMs
+        public MainViewModel MainVM { get; set; }
+
         //repos
         public static IHeroesRepository HeroesRepository { get; set; }
         public static IAttributesRepository AttributesRepository { get; set; }
@@ -25,7 +28,19 @@ namespace ToolDevProject.WPF.ViewModel
         private IAttributesRepository _apiAttributesRepository { get; set; }
 
         //data
-        public BaseHero SelectedHero { get; set; }
+        private BaseHero _selectedHero;
+        public BaseHero SelectedHero 
+        {
+            get
+            {
+                return _selectedHero;
+            }
+            set
+            {
+                _selectedHero = value;
+                MainVM.SwitchPage();
+            }
+        }
 
         private List<BaseHero> _heroes;
         public List<BaseHero> Heroes

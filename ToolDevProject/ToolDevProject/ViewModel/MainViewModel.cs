@@ -13,24 +13,16 @@ namespace ToolDevProject.WPF.ViewModel
 {
     internal class MainViewModel : ObservableObject
     {
-        private OverviewPage _mainPage = new OverviewPage();
+        public OverviewPage MainPage;
 
-        public OverviewPage MainPage { get => _mainPage; set => _mainPage = value; }
+        public DetailPage HeroPage;
 
-        private DetailPage _heroPage;
-
-        public DetailPage HeroPage { get => _heroPage; set => _heroPage = value; }
-
-        private Page _currentPage;
-        public Page CurrentPage { get => _currentPage; set => _currentPage = value; }
-
-        private RelayCommand _switchPageCommand;
-        public RelayCommand SwitchPageCommand { get => _switchPageCommand; set => _switchPageCommand = value; }
+        public Page CurrentPage { get; set; }
 
         public MainViewModel()
         {
-            SwitchPageCommand = new RelayCommand(SwitchPage);
             MainPage = new OverviewPage();
+            (MainPage.DataContext as OverviewPageVM).MainVM = this;
             HeroPage = new DetailPage();
             CurrentPage = MainPage;
         }

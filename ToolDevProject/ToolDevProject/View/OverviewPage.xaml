@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToolDevProject.WPF.View"
       xmlns:viewmodel="clr-namespace:ToolDevProject.WPF.ViewModel"
+      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OverviewPage">
@@ -13,8 +14,9 @@
         <viewmodel:OverviewPageVM/>
     </Page.DataContext>
 
-    <Grid>
-        <ListBox x:Name="heroListBox" Background="Black" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <Grid Background="Black">
+        <Image Source="../Resources/Images/OverviewBackground.png"/>
+        <ListBox Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel Orientation="Horizontal"/>
