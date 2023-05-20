@@ -10,14 +10,6 @@ namespace ToolDevProject.WPF.Model
 {
     public abstract class BaseHero
     {
-        public enum AttributeType
-        {
-            strength,
-            agility,
-            intelligence,
-            universal,
-        }
-
         //info
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
@@ -25,19 +17,30 @@ namespace ToolDevProject.WPF.Model
         [JsonProperty(PropertyName = "localized_name")]
         public string Name { get; set; }
 
+        private string _imageUrl;
         [JsonProperty(PropertyName = "img")]
-        public string ImageUrl { get; set; }
+        public string ImageUrl 
+        {
+            get => "http://cdn.dota2.com" + _imageUrl;
+            set => _imageUrl = value;
+        }
 
+        private string _iconUrl;
         [JsonProperty(PropertyName = "icon")]
-        public string IconUrl { get; set; }
+        public string IconUrl 
+        {
+            get => "http://cdn.dota2.com" + _iconUrl;
+            set => _iconUrl = value;
+        }
 
 
         //other info
         [JsonProperty(PropertyName = "roles")]
         public List<string> Roles { get; set; }
 
+        
         [JsonProperty(PropertyName = "primary_attr")]
-        public AttributeType PrimaryAttribute { get; set; }
+        public string PrimaryAttribute { get; set; }
 
 
         //static stats
@@ -50,63 +53,63 @@ namespace ToolDevProject.WPF.Model
 
         //private stats
         [JsonProperty(PropertyName = "base_health")]
-        private int _baseHealth;
+        public int BaseHealth { get; set; }
 
         [JsonProperty(PropertyName = "base_health_regen")]
-        private float _baseHealthRegen;
+        public float BaseHealthRegen { get; set; }
 
         [JsonProperty(PropertyName = "base_mana")]
-        private int _baseMana;
+        public int BaseMana { get; set; }
 
         [JsonProperty(PropertyName = "base_mana_regen")]
-        private float _baseManaRegen;
+        public float BaseManaRegen { get; set; }
 
         [JsonProperty(PropertyName = "base_attack_min")]
-        private int _baseMinDamage;
+        public int BaseMinDamage { get; set; }
 
         [JsonProperty(PropertyName = "base_attack_max")]
-        private int _baseMaxDamage;
+        public int BaseMaxDamage { get; set; }
 
         [JsonProperty(PropertyName = "base_attack_time")]
-        private int _baseAttackSpeed;
+        public int BaseAttackSpeed { get; set; }
 
         [JsonProperty(PropertyName = "base_armor")]
-        private int _baseArmor;
+        public int BaseArmor { get; set; }
 
         [JsonProperty(PropertyName = "base_mr")]
-        private int _baseMagicResistance;
+        public int BaseMagicResistance { get; set; }
 
 
         //attributes
         [JsonProperty(PropertyName = "base_str")]
-        private int _baseStrength;
+        public int BaseStrength;
 
         [JsonProperty(PropertyName = "base_agi")]
-        private int _baseAgility;
+        public int BaseAgility;
 
         [JsonProperty(PropertyName = "base_int")]
-        private int _baseIntelligence;
+        public int BaseIntelligence;
 
         [JsonProperty(PropertyName = "str_gain")]
-        private float _strengthGain;
+        public float StrengthGain;
 
         [JsonProperty(PropertyName = "agi_gain")]
-        private float _agilityGain;
+        public float AgilityGain;
 
         [JsonProperty(PropertyName = "int_gain")]
-        private float _intelligenceGain;
+        public float IntelligenceGain;
 
 
         //public stats
-        public int Level { get; set; }
+        public int Level { get; set; } = 1;
 
         //strength
         public int Health
         {
             get
             {
-                return (int)(_baseHealth +
-                    OverviewPageVM.AttributesRepository.StrengthHealthGain * (_baseStrength + Level * _strengthGain));
+                return (int)(BaseHealth +
+                    OverviewPageVM.AttributesRepository.StrengthHealthGain * (BaseStrength + Level * StrengthGain));
             }
         }
 
@@ -114,8 +117,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return _baseHealthRegen +
-                    OverviewPageVM.AttributesRepository.StrengthHealthRegenGain * (_baseStrength + Level * _strengthGain);
+                return BaseHealthRegen +
+                    OverviewPageVM.AttributesRepository.StrengthHealthRegenGain * (BaseStrength + Level * StrengthGain);
             }
         }
 
@@ -124,8 +127,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(_baseArmor +
-                    OverviewPageVM.AttributesRepository.AgilityArmorGain * (_baseAgility + Level * _agilityGain));
+                return (int)(BaseArmor +
+                    OverviewPageVM.AttributesRepository.AgilityArmorGain * (BaseAgility + Level * AgilityGain));
             }
         }
 
@@ -133,8 +136,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(_baseAttackSpeed +
-                    OverviewPageVM.AttributesRepository.AgilityAttackSpeedGain * (_baseAgility + Level * _agilityGain));
+                return (int)(BaseAttackSpeed +
+                    OverviewPageVM.AttributesRepository.AgilityAttackSpeedGain * (BaseAgility + Level * AgilityGain));
             }
         }
 
@@ -143,8 +146,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(_baseMana +
-                    OverviewPageVM.AttributesRepository.IntelligenceManaGain * (_baseIntelligence + Level * _intelligenceGain));
+                return (int)(BaseMana +
+                    OverviewPageVM.AttributesRepository.IntelligenceManaGain * (BaseIntelligence + Level * IntelligenceGain));
             }
         }
 
@@ -152,8 +155,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return _baseManaRegen +
-                    OverviewPageVM.AttributesRepository.IntelligenceManaRegenGain * (_baseIntelligence + Level * _intelligenceGain);
+                return BaseManaRegen +
+                    OverviewPageVM.AttributesRepository.IntelligenceManaRegenGain * (BaseIntelligence + Level * IntelligenceGain);
             }
         }
 
@@ -161,8 +164,8 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(_baseMagicResistance +
-                    OverviewPageVM.AttributesRepository.IntelligenceMagicResistanceGain * (_baseIntelligence + Level * _intelligenceGain));
+                return (int)(BaseMagicResistance +
+                    OverviewPageVM.AttributesRepository.IntelligenceMagicResistanceGain * (BaseIntelligence + Level * IntelligenceGain));
             }
         }
 
@@ -171,22 +174,23 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                int damage = (_baseMinDamage + _baseMaxDamage) / 2;
+                int damage = (BaseMinDamage + BaseMaxDamage) / 2;
 
-                switch (PrimaryAttribute)
+                if (PrimaryAttribute == "str")
                 {
-                    case AttributeType.strength:
-                        damage += (int)(_baseStrength + Level * _strengthGain);
-                        break;
-                    case AttributeType.agility:
-                        damage += (int)(_baseAgility + Level * _agilityGain);
-                        break;
-                    case AttributeType.intelligence:
-                        damage += (int)(_baseIntelligence + Level * _intelligenceGain);
-                        break;
-                    case AttributeType.universal:
-                        damage += (int)(((_baseStrength + Level * _strengthGain) + (_baseAgility + Level * _agilityGain) + (_baseIntelligence + Level * _intelligenceGain)) * OverviewPageVM.AttributesRepository.UniversalDamageGain);
-                        break;
+                    damage += (int)(BaseStrength + Level * StrengthGain);
+                }
+                else if (PrimaryAttribute == "agi")
+                {
+                    damage += (int)(BaseAgility + Level * AgilityGain);
+                }
+                else if (PrimaryAttribute == "int")
+                {
+                    damage += (int)(BaseIntelligence + Level * IntelligenceGain);
+                }
+                else
+                {
+                    damage += (int)(((BaseStrength + Level * StrengthGain) + (BaseAgility + Level * AgilityGain) + (BaseIntelligence + Level * IntelligenceGain)) * OverviewPageVM.AttributesRepository.UniversalDamageGain);
                 }
 
                 return damage;
@@ -197,7 +201,7 @@ namespace ToolDevProject.WPF.Model
 
     public class MeleeHero : BaseHero
     {
-        //empty until we need some melee specific stat (could be damage block, or different interactions with items)
+        //empty until we would use some melee specific stat (could be damage block, or different interactions with items)
     }
 
     public class RangedHero : BaseHero

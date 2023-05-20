@@ -20,6 +20,6 @@ namespace ToolDevProject.WPF.Repository
 
         float UniversalDamageGain { get; set; }
 
-        void LoadAttributes();
+        Task LoadAttributes();
     }
 }

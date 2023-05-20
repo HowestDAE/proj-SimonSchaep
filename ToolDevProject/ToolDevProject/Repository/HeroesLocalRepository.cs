@@ -34,10 +34,10 @@ namespace ToolDevProject.WPF.Repository
                     string attackType = token.First().SelectToken("attack_type").ToObject<string>();
                     Type heroType = GetHeroType(attackType);
                     _heroes.Add(token.First().ToObject(heroType) as BaseHero);
-                }                    
-            }
+                }
 
-            await Task.Delay(1000);
+                await Task.Delay(1000);
+            }
 
             return _heroes;
         }

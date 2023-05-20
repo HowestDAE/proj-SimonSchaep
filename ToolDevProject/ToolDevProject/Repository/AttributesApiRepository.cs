@@ -24,7 +24,7 @@ namespace ToolDevProject.WPF.Repository
         public float IntelligenceMagicResistanceGain { get; set; }
         public float UniversalDamageGain { get; set; }
 
-        public async void LoadAttributes()
+        public async Task LoadAttributes()
         {
             throw new NotImplementedException();
         }

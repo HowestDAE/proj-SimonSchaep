@@ -25,8 +25,10 @@ namespace ToolDevProject.WPF.Repository
 
         public float UniversalDamageGain { get; set; }
 
-        public async void LoadAttributes()
+        public async Task LoadAttributes()
         {
+            if (StrengthHealthGain != 0) return; //already loaded before
+
             var assembly = Assembly.GetExecutingAssembly();
             var resourceName = "ToolDevProject.WPF.Resources.DataFiles.Attributes.json";
 
