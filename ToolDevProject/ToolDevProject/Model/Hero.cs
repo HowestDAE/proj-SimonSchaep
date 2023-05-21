@@ -11,9 +11,6 @@ namespace ToolDevProject.WPF.Model
     public abstract class BaseHero
     {
         //info
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
-
         [JsonProperty(PropertyName = "localized_name")]
         public string Name { get; set; }
 
@@ -23,14 +20,6 @@ namespace ToolDevProject.WPF.Model
         {
             get => "http://cdn.dota2.com" + _imageUrl;
             set => _imageUrl = value;
-        }
-
-        private string _iconUrl;
-        [JsonProperty(PropertyName = "icon")]
-        public string IconUrl 
-        {
-            get => "http://cdn.dota2.com" + _iconUrl;
-            set => _iconUrl = value;
         }
 
 
@@ -131,12 +120,19 @@ namespace ToolDevProject.WPF.Model
         public int Level { get; set; } = 1;
 
         //strength
+        public int Strength
+        {
+            get
+            {
+                return (int)(BaseStrength + Level * StrengthGain);
+            }
+        }
+
         public int Health
         {
             get
             {
-                return (int)(BaseHealth +
-                    OverviewPageVM.AttributesRepository.StrengthHealthGain * (BaseStrength + Level * StrengthGain));
+                return (int)(BaseHealth + OverviewPageVM.AttributesRepository.StrengthHealthGain * Strength);
             }
         }
 
@@ -144,18 +140,24 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (float)(Math.Round(BaseHealthRegen +
-                    OverviewPageVM.AttributesRepository.StrengthHealthRegenGain * (BaseStrength + Level * StrengthGain), 1));
+                return (float)(Math.Round(BaseHealthRegen + OverviewPageVM.AttributesRepository.StrengthHealthRegenGain * Strength, 1));
             }
         }
 
         //agility
+        public int Agility
+        {
+            get
+            {
+                return (int)(BaseAgility + Level * AgilityGain);
+            }
+        }
+
         public int Armor
         {
             get
             {
-                return (int)(BaseArmor +
-                    OverviewPageVM.AttributesRepository.AgilityArmorGain * (BaseAgility + Level * AgilityGain));
+                return (int)(BaseArmor + OverviewPageVM.AttributesRepository.AgilityArmorGain * Agility);
             }
         }
 
@@ -163,18 +165,24 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(BaseAttackSpeed +
-                    OverviewPageVM.AttributesRepository.AgilityAttackSpeedGain * (BaseAgility + Level * AgilityGain));
+                return (int)(BaseAttackSpeed + OverviewPageVM.AttributesRepository.AgilityAttackSpeedGain * Agility);
             }
         }
 
         //intelligence
+        public int Intelligence
+        {
+            get
+            {
+                return (int)(BaseIntelligence + Level * IntelligenceGain);
+            }
+        }
+
         public int Mana
         {
             get
             {
-                return (int)(BaseMana +
-                    OverviewPageVM.AttributesRepository.IntelligenceManaGain * (BaseIntelligence + Level * IntelligenceGain));
+                return (int)(BaseMana + OverviewPageVM.AttributesRepository.IntelligenceManaGain * Intelligence);
             }
         }
 
@@ -182,8 +190,7 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (float)(Math.Round(BaseManaRegen +
-                    OverviewPageVM.AttributesRepository.IntelligenceManaRegenGain * (BaseIntelligence + Level * IntelligenceGain),1));
+                return (float)(Math.Round(BaseManaRegen + OverviewPageVM.AttributesRepository.IntelligenceManaRegenGain * Intelligence, 1));
             }
         }
 
@@ -191,8 +198,7 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(BaseMagicResistance +
-                    OverviewPageVM.AttributesRepository.IntelligenceMagicResistanceGain * (BaseIntelligence + Level * IntelligenceGain));
+                return (int)(BaseMagicResistance + OverviewPageVM.AttributesRepository.IntelligenceMagicResistanceGain * Intelligence);
             }
         }
 
