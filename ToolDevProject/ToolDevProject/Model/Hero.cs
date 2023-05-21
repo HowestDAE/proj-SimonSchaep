@@ -22,6 +22,29 @@ namespace ToolDevProject.WPF.Model
             set => _imageUrl = value;
         }
 
+        public string BackgroundImage
+        {
+            get
+            {
+                if (PrimaryAttribute == "strength")
+                {
+                    return "../resources/images/strengthbackground.png";
+                }
+                if (PrimaryAttribute == "agility")
+                {
+                    return "../resources/images/agilitybackground.png";
+                }
+                if (PrimaryAttribute == "intelligence")
+                {
+                    return "../resources/images/intelligencebackground.png";
+                }
+                if (PrimaryAttribute == "universal")
+                {
+                    return "../resources/images/universalbackground.png";
+                }
+                return "";
+            }
+        }
 
         //other info
         [JsonProperty(PropertyName = "roles")]
