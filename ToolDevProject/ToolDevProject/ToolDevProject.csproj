@@ -166,8 +166,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="Resources\DataFiles\HeroStatsLite.json" />
-    <EmbeddedResource Include="Resources\DataFiles\HeroStats.json" />
     <EmbeddedResource Include="Resources\DataFiles\Attributes.json" />
     <EmbeddedResource Include="Resources\DataFiles\Heroes.json" />
   </ItemGroup>
