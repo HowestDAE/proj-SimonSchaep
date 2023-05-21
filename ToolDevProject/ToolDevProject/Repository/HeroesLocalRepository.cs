@@ -38,6 +38,9 @@ namespace ToolDevProject.WPF.Repository
                     _heroes.Add(token.First().ToObject(heroType) as BaseHero);
                 }
 
+                //sort alphabetically
+                _heroes.Sort((hero1, hero2) => hero1.Name.CompareTo(hero2.Name));
+
                 await Task.Delay(1000);
             }
 

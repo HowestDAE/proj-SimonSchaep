@@ -39,6 +39,7 @@ namespace ToolDevProject.WPF.ViewModel
             {
                 _selectedHero = value;
                 MainVM.SwitchPage();
+                OnPropertyChanged(nameof(SelectedHero));
             }
         }
 
@@ -146,6 +147,7 @@ namespace ToolDevProject.WPF.ViewModel
                 HeroesRepository = _localHeroesRepository;
             }
             LoadHeroes();
+            UpdateFilters();
 
             //no api repository for attributes, since that data isn't available yet on the api
             //if (AttributesRepository is AttributesLocalRepository)

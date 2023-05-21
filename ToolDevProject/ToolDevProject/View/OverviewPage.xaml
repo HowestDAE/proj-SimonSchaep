@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ToolDevProject.WPF.View"
       xmlns:viewmodel="clr-namespace:ToolDevProject.WPF.ViewModel"
-      
+      xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"      
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="OverviewPage">
@@ -27,8 +27,8 @@
         <Image Grid.ColumnSpan="3" Grid.RowSpan="2" Source="../Resources/Images/OverviewBackground.png"/>
         <ComboBox Grid.Column="0" ItemsSource="{Binding Attributes}" SelectedItem="{Binding SelectedAttribute}"/>
         <ComboBox Grid.Column="1" ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}"/>
-        <TextBox Grid.Column="2" Text="{Binding SelectedNameContains, UpdateSourceTrigger=PropertyChanged}"/>
-        <ListBox Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}"
+        <extToolkit:WatermarkTextBox Grid.Column="2" Watermark="Search..." Text="{Binding SelectedNameContains, UpdateSourceTrigger=PropertyChanged}"/>
+        <ListBox x:Name="HeroesListbox" Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>

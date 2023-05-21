@@ -45,6 +45,9 @@ namespace ToolDevProject.WPF.Repository
                         Console.WriteLine(ex.Message);
                     }
                 }
+
+                //sort alphabetically
+                _heroes.Sort((hero1, hero2) => hero1.Name.CompareTo(hero2.Name));
             }
 
             return _heroes;
