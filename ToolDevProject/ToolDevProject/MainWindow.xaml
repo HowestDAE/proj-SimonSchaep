@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ToolDevProject.WPF"
         xmlns:viewmodel="clr-namespace:ToolDevProject.WPF.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="880">
+        Title="MainWindow" Height="500" Width="880">
 
     <Frame Grid.Row="0" NavigationUIVisibility="Hidden" Content="{Binding CurrentPage}"/>
 

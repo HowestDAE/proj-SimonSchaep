@@ -7,20 +7,19 @@
       xmlns:viewmodel="clr-namespace:ToolDevProject.WPF.ViewModel"
       xmlns:system="clr-namespace:System;assembly=mscorlib" 
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="880"
+      d:DesignHeight="500" d:DesignWidth="880"
       Title="DetailPage">
 
     <Page.DataContext>
         <viewmodel:DetailPageVM/>
     </Page.DataContext>
 
-    
     <Grid Background="Black">
         <Image Source="../Resources/Images/OverviewBackground.png"/>
         <Button Command="{Binding BackCommand}"
-                Content="BACK" FontWeight="Bold" Background="Black" Foreground="DarkRed"
-                Margin="10,10,10,10"
-                HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            Content="BACK" FontWeight="Bold" FontSize="20" Background="Black" Foreground="DarkRed"
+            Margin="0,10,15,0"
+            HorizontalAlignment="Right" VerticalAlignment="Top"/>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -37,8 +36,8 @@
                 </Grid.ColumnDefinitions>
                 <!--Image-->
                 <Image Source="{Binding CurrentHero.ImageUrl}" 
-                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1"
-                   HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1" Grid.RowSpan="1"
+                HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 <!--Attributes-->
                 <Grid Grid.Column="1">
                     <Grid.ColumnDefinitions>
@@ -50,32 +49,38 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" 
-                           Source="../Resources/Images/StrengthIcon.png"/>
-                    <Image Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" 
-                           Source="../Resources/Images/AgilityIcon.png"/>
-                    <Image Margin="10,10,10,10" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" 
-                           Source="../Resources/Images/IntelligenceIcon.png"/>
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" 
-                           Content="{Binding CurrentHero.Strength}" 
-                           Foreground="White" FontSize="18"/>
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" 
-                           Content="{Binding CurrentHero.Agility}" 
-                           Foreground="White" FontSize="18"/>
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" 
-                           Content="{Binding CurrentHero.Intelligence}" 
-                           Foreground="White" FontSize="18"/>
+                    <Image Margin="15,15,15,15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0" 
+                        Source="../Resources/Images/StrengthIcon.png"/>
+                    <Image Margin="15,15,15,15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" 
+                        Source="../Resources/Images/AgilityIcon.png"/>
+                    <Image Margin="15,15,15,15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2" 
+                        Source="../Resources/Images/IntelligenceIcon.png"/>
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
+                        <Label  
+                            Content="{Binding CurrentHero.Strength}" 
+                            Foreground="White" FontSize="10"/>
+                    </Viewbox>
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" >
+                        <Label 
+                            Content="{Binding CurrentHero.Agility}" 
+                            Foreground="White" FontSize="10"/>
+                    </Viewbox>
+                    <Viewbox HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" >
+                        <Label 
+                            Content="{Binding CurrentHero.Intelligence}" 
+                            Foreground="White" FontSize="10"/>
+                    </Viewbox>
                 </Grid>
             </Grid>
-            
-            <!--Stats-->            
-            <Grid Grid.Row="1" Grid.Column="0" Margin="50,10,50,10">
+
+            <!--Stats-->
+            <Grid Grid.Row="1" Grid.Column="0"  Margin="50,10,50,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="50*"/>
                     <ColumnDefinition Width="50*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="1.5*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -93,40 +98,90 @@
                     <SolidColorBrush x:Key="TitleColor" Color="White"/>
                     <SolidColorBrush x:Key="TextColor" Color="White"/>
                     <SolidColorBrush x:Key="NumberColor" Color="White"/>
-                    <system:Double x:Key="TextFontSize">14</system:Double>
-                    <system:Double x:Key="TitleFontSize">18</system:Double>
+                    <system:Double x:Key="TextFontSize">16</system:Double>
+                    <system:Double x:Key="TitleFontSize">22</system:Double>
                     <system:Double x:Key="NumberFontSize">14</system:Double>
                 </Grid.Resources>
-                <Label Content="Stats" Padding="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="{StaticResource TitleFontSize}" Foreground="{StaticResource TitleColor}" FontWeight="Bold"/>
+                <Viewbox Margin="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Top" HorizontalAlignment="Left" >
+                    <Label Content="Stats" FontSize="{StaticResource TitleFontSize}" Foreground="{StaticResource TitleColor}" FontWeight="Bold"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1" HorizontalAlignment="Left">
+                    <Label Content="Level" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left">
+                    <Label Content="{Binding CurrentHeroLevel}" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Margin="15,0,0,0" Grid.Row="1" Grid.Column="1">
+                    <Slider Value="{Binding CurrentHeroLevel}" Width="100" Height="20" Minimum="1" Maximum="30"/>
+                </Viewbox>
 
-                <Label Content="Level" Padding="0,0,0,0" Grid.Row="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHeroLevel}" Padding="0,0,0,0" Grid.Row="1" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Slider Value="{Binding CurrentHeroLevel}" Minimum="1" Maximum="30"
-                        Margin="15,0,0,0" Grid.Row="1" Grid.Column="1"/>
+                <Viewbox Grid.Row="2" HorizontalAlignment="Left">
+                    <Label Content="Health" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="3" HorizontalAlignment="Left">
+                    <Label Content="Health Regen" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="4" HorizontalAlignment="Left">
+                        <Label Content="Mana" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="5" HorizontalAlignment="Left">
+                    <Label Content="Mana Regen" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="6" HorizontalAlignment="Left">
+                    <Label Content="Armor" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="7" HorizontalAlignment="Left">
+                    <Label Content="Magic Resistance" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="8" HorizontalAlignment="Left">
+                    <Label Content="Attack Speed" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="9" HorizontalAlignment="Left">
+                    <Label Content="Damage" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="10" HorizontalAlignment="Left">
+                    <Label Content="Movement Speed" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="11" HorizontalAlignment="Left">
+                    <Label Content="Attack Range" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="12" HorizontalAlignment="Left">
+                    <Label Content="Projectile Speed" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
 
-                <Label Content="Health" Padding="0,0,0,0" Grid.Row="2" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Health Regen" Padding="0,0,0,0" Grid.Row="3" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Mana" Padding="0,0,0,0" Grid.Row="4" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Mana Regen" Padding="0,0,0,0" Grid.Row="5" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Armor" Padding="0,0,0,0" Grid.Row="6" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Magic Resistance" Padding="0,0,0,0" Grid.Row="7" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Attack Speed" Padding="0,0,0,0" Grid.Row="8" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Damage" Padding="0,0,0,0" Grid.Row="9" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Movement Speed" Padding="0,0,0,0" Grid.Row="10" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Attack Range" Padding="0,0,0,0" Grid.Row="11" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="Projectile Speed" Padding="0,0,0,0" Grid.Row="12" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-
-                <Label Content="{Binding CurrentHero.Health}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="2" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.HealthRegen}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="3" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.Mana}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="4" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.ManaRegen}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="5" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.Armor}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="6" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.MagicResistance}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="7" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.AttackSpeed}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="8" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.Damage}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="9" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.MoveSpeed}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="10" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentHero.AttackRange}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="11" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
-                <Label Content="{Binding CurrentRangedHero.ProjectileSpeed, FallbackValue=n/a}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="12" Grid.Column="1" FontSize="{StaticResource TextFontSize}" Foreground="{StaticResource TextColor}"/>
+                <Viewbox Grid.Row="2" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.Health}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="2" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="3" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.HealthRegen}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="3" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="4" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.Mana}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="4" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="5" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.ManaRegen}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="5" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="6" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.Armor}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="6" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="7" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.MagicResistance}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="7" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="8" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.AttackSpeed}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="8" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="9" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.Damage}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="9" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="10" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.MoveSpeed}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="10" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="11" Grid.Column="1">
+                    <Label Content="{Binding CurrentHero.AttackRange}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="11" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
+                <Viewbox Grid.Row="12" Grid.Column="1">
+                    <Label Content="{Binding CurrentRangedHero.ProjectileSpeed, FallbackValue=n/a}" HorizontalAlignment="Center" Padding="0,0,0,0" Grid.Row="12" Grid.Column="1" FontSize="{StaticResource NumberFontSize}" Foreground="{StaticResource TextColor}"/>
+                </Viewbox>
             </Grid>
         </Grid>
     </Grid>
