@@ -12,6 +12,6 @@ namespace ToolDevProject.WPF.Repository
         Task<List<BaseHero>> GetHeroes();
         Task<List<string>> GetAttributes();
         Task<List<string>> GetRoles();
-        List<BaseHero> GetHeroes(string attribute, string role, string nameContains);
+        Task<List<BaseHero>> GetHeroes(string attribute, string role, string nameContains);
     }
 }

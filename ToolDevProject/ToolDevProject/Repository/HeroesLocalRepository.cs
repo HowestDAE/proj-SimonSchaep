@@ -47,8 +47,13 @@ namespace ToolDevProject.WPF.Repository
             return _heroes;
         }
 
-        public List<BaseHero> GetHeroes(string attribute, string role, string nameContains)
+        public async Task<List<BaseHero>> GetHeroes(string attribute, string role, string nameContains)
         {
+            if (_heroes == null)
+            {
+                await GetHeroes();
+            }
+
             List<BaseHero> filteredHeroes = new List<BaseHero>();
 
             foreach (BaseHero hero in _heroes)

@@ -146,7 +146,6 @@ namespace ToolDevProject.WPF.ViewModel
             {
                 HeroesRepository = _localHeroesRepository;
             }
-            LoadHeroes();
             UpdateFilters();
 
             //no api repository for attributes, since that data isn't available yet on the api
@@ -204,9 +203,9 @@ namespace ToolDevProject.WPF.ViewModel
             await AttributesRepository.LoadAttributes();
         }
 
-        private void UpdateFilters()
+        private async void UpdateFilters()
         {
-            Heroes = HeroesRepository.GetHeroes(SelectedAttribute, SelectedRole, SelectedNameContains);
+            Heroes = await HeroesRepository.GetHeroes(SelectedAttribute, SelectedRole, SelectedNameContains);
         }
     }
 }
