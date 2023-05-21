@@ -7,7 +7,7 @@
       xmlns:viewmodel="clr-namespace:ToolDevProject.WPF.ViewModel"
       xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"      
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="880"
       Title="OverviewPage">
 
     <Page.DataContext>
@@ -25,8 +25,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Image Grid.ColumnSpan="3" Grid.RowSpan="2" Source="../Resources/Images/OverviewBackground.png"/>
-        <ComboBox Grid.Column="0" ItemsSource="{Binding Attributes}" SelectedItem="{Binding SelectedAttribute}"/>
-        <ComboBox Grid.Column="1" ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}"/>
+        <DockPanel Grid.Column="0">
+            <Label Content="Primary Attribute" Background="LightGray" Foreground="Black"/>
+            <ComboBox ItemsSource="{Binding Attributes}" SelectedItem="{Binding SelectedAttribute}"/>
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label Content="Role" Background="LightGray" Foreground="Black"/>
+            <ComboBox ItemsSource="{Binding Roles}" SelectedItem="{Binding SelectedRole}"/>
+        </DockPanel>
         <extToolkit:WatermarkTextBox Grid.Column="2" Watermark="Search..." Text="{Binding SelectedNameContains, UpdateSourceTrigger=PropertyChanged}"/>
         <ListBox x:Name="HeroesListbox" Grid.Row="1" Grid.ColumnSpan="3" Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -58,17 +64,4 @@
             Command="{Binding SwitchRepositoryCommand}"
             Content="{Binding SwitchRepoText}"/>
     </Grid>
-
-    <!--<ListBox Grid.Row="1" Foreground="White" Background="Transparent" ItemsSource="{Binding Heroes}" SelectedItem="{Binding SelectedHero}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <StackPanel Orientation="Horizontal">
-                    --><!-- should contain type icon image when binding -->
-                    <!--<Image Source="{Binding Type, Converter={StaticResource TypeToIconConverter}}" Height="20" Width="20" Margin="4"/>-->
-                    <!-- binding needed --><!--
-                    <TextBlock Text="{Binding Name}" Margin="10,0" Foreground="White" VerticalAlignment="Center" FontSize="21"/>
-                </StackPanel>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>-->
 </Page>
