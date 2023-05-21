@@ -38,9 +38,36 @@ namespace ToolDevProject.WPF.Model
         [JsonProperty(PropertyName = "roles")]
         public List<string> Roles { get; set; }
 
-        
+
+        private string _primaryAttribute;
         [JsonProperty(PropertyName = "primary_attr")]
-        public string PrimaryAttribute { get; set; }
+        public string PrimaryAttribute 
+        {
+            get
+            {
+                if(_primaryAttribute == "str")
+                {
+                    return "strength";
+                }
+                if (_primaryAttribute == "agi")
+                {
+                    return "agility";
+                }
+                if (_primaryAttribute == "int")
+                {
+                    return "intelligence";
+                }
+                if (_primaryAttribute == "all")
+                {
+                    return "universal";
+                }
+                return "attribute not recognized";
+            }
+            set
+            {
+                _primaryAttribute = value;
+            }
+        }
 
 
         //static stats
