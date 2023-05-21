@@ -147,7 +147,7 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(BaseStrength + Level * StrengthGain);
+                return (int)(BaseStrength + (Level - 1) * StrengthGain);
             }
         }
 
@@ -172,7 +172,7 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(BaseAgility + Level * AgilityGain);
+                return (int)(BaseAgility + (Level - 1) * AgilityGain);
             }
         }
 
@@ -197,7 +197,7 @@ namespace ToolDevProject.WPF.Model
         {
             get
             {
-                return (int)(BaseIntelligence + Level * IntelligenceGain);
+                return (int)(BaseIntelligence + (Level - 1) * IntelligenceGain);
             }
         }
 
