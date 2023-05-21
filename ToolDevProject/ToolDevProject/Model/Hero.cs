@@ -232,21 +232,21 @@ namespace ToolDevProject.WPF.Model
             {
                 int damage = (BaseMinDamage + BaseMaxDamage) / 2;
 
-                if (PrimaryAttribute == "str")
+                if (PrimaryAttribute == "strength")
                 {
-                    damage += (int)(BaseStrength + Level * StrengthGain);
+                    damage += Strength;
                 }
-                else if (PrimaryAttribute == "agi")
+                else if (PrimaryAttribute == "agility")
                 {
-                    damage += (int)(BaseAgility + Level * AgilityGain);
+                    damage += Agility;
                 }
-                else if (PrimaryAttribute == "int")
+                else if (PrimaryAttribute == "intelligence")
                 {
-                    damage += (int)(BaseIntelligence + Level * IntelligenceGain);
+                    damage += Intelligence;
                 }
-                else
+                else if (PrimaryAttribute == "universal")
                 {
-                    damage += (int)(((BaseStrength + Level * StrengthGain) + (BaseAgility + Level * AgilityGain) + (BaseIntelligence + Level * IntelligenceGain)) * OverviewPageVM.AttributesRepository.UniversalDamageGain);
+                    damage += (int)((Strength + Agility + Intelligence) * OverviewPageVM.AttributesRepository.UniversalDamageGain);
                 }
 
                 return damage;
