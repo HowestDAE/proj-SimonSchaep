@@ -168,6 +168,9 @@
     </None>
     <EmbeddedResource Include="Resources\DataFiles\Attributes.json" />
     <EmbeddedResource Include="Resources\DataFiles\Heroes.json" />
+    <EmbeddedResource Include="Resources\DataFiles\Items.json" />
+    <EmbeddedResource Include="Resources\DataFiles\ItemPopularity.json" />
+    <None Include="Resources\DataFiles\Lore.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
