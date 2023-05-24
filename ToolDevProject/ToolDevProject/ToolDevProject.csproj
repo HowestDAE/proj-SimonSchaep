@@ -107,12 +107,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Hero.cs" />
+    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\ItemPopularities.cs" />
     <Compile Include="Repository\AttributesApiRepository.cs" />
     <Compile Include="Repository\AttributesLocalRepository.cs" />
     <Compile Include="Repository\HeroesApiRepository.cs" />
     <Compile Include="Repository\HeroesLocalRepository.cs" />
     <Compile Include="Repository\IAttributesRepository.cs" />
     <Compile Include="Repository\IHeroesRepository.cs" />
+    <Compile Include="Repository\IItemPopularitiesRepository.cs" />
+    <Compile Include="Repository\IItemsRepository.cs" />
+    <Compile Include="Repository\ILoreRepository.cs" />
     <Compile Include="ViewModel\DetailPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverviewPageVM.cs" />
