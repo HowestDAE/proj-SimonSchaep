@@ -7,6 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
+using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository
 {
@@ -23,16 +25,27 @@ namespace ToolDevProject.WPF.Repository
         {
             if (_heroLores != null) return; //already loaded before
 
-            var assembly = Assembly.GetExecutingAssembly();
-            var resourceName = "ToolDevProject.WPF.Resources.DataFiles.Lore.json";
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.GetAsync("https://api.opendota.com/api/constants/lore");
 
-            Stream stream = assembly.GetManifestResourceStream(resourceName);
-            var reader = new StreamReader(stream);
-            string json = reader.ReadToEnd();
-            JObject obj = JObject.Parse(json);
-            _heroLores = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new HttpRequestException(response.ReasonPhrase);
+                    }
 
-            await Task.Delay(1000); //simulate api request delay
+                    string json = await response.Content.ReadAsStringAsync();
+                    JObject obj = JObject.Parse(json);
+                    _heroLores = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
         }
     }
 }
