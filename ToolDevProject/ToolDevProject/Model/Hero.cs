@@ -14,6 +14,9 @@ namespace ToolDevProject.WPF.Model
         [JsonProperty(PropertyName = "localized_name")]
         public string Name { get; set; }
 
+        [JsonProperty(PropertyName = "id")]
+        public int Id { get; set; }
+
         private string _actualName;
         [JsonProperty(PropertyName = "name")]
         public string ActualName 

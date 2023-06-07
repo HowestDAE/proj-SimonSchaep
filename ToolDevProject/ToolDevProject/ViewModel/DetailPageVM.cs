@@ -46,6 +46,19 @@ namespace ToolDevProject.WPF.ViewModel
             }
         }
 
+        private List<DotaItem> _currentHeroPopularItems;
+        public List<DotaItem> CurrentHeroPopularItems
+        {
+            get
+            {
+                return _currentHeroPopularItems;
+            }
+            set
+            {
+                SetCurrentHeroPopularItems();
+            }
+        }
+
         public int CurrentHeroLevel
         {
             get { return CurrentHero.Level; }
@@ -69,6 +82,7 @@ namespace ToolDevProject.WPF.ViewModel
                 _currentHero = value;
 
                 SetCurrentHeroLore();
+                SetCurrentHeroPopularItems();
 
                 OnPropertyChanged(nameof(CurrentHeroLevel));
                 OnPropertyChanged(nameof(CurrentHero));
@@ -163,6 +177,25 @@ namespace ToolDevProject.WPF.ViewModel
             }
 
             OnPropertyChanged(nameof(CurrentHeroLore));
+        }
+
+        private async void SetCurrentHeroPopularItems()
+        {
+            if (CurrentHero.ActualName == null) //return if currenthero is not valid
+            {
+                return;
+            }
+
+            var itemPopularities = await ItemPopularitiesRepository.GetItemPopularities(CurrentHero.Id);
+
+            _currentHeroPopularItems = new List<DotaItem>();
+
+            foreach(int id in itemPopularities.ItemIds)
+            {
+                _currentHeroPopularItems.Add(await ItemsRepository.GetItem(id));
+            }
+
+            OnPropertyChanged(nameof(CurrentHeroPopularItems));
         }
     }
 }
