@@ -29,7 +29,7 @@ namespace ToolDevProject.WPF.ViewModel
 
         //data
         private BaseHero _selectedHero;
-        public BaseHero SelectedHero 
+        public BaseHero SelectedHero
         {
             get
             {
@@ -120,17 +120,18 @@ namespace ToolDevProject.WPF.ViewModel
         }
 
         //Switch repo
+        private bool _isApi = false;
         public string SwitchRepoText
         {
             get
             {
-                if (HeroesRepository is HeroesLocalRepository)
+                if (_isApi)
                 {
-                    return "Switch to API";
+                    return "Switch to Local";
                 }
                 else
                 {
-                    return "Switch to Local";
+                    return "Switch to API";
                 }
             }
         }
@@ -138,7 +139,9 @@ namespace ToolDevProject.WPF.ViewModel
 
         public void SwitchRepositories()
         {
-            if(HeroesRepository is HeroesLocalRepository)
+            _isApi = !_isApi;
+
+            if (_isApi)
             {
                 HeroesRepository = _apiHeroesRepository;
             }
@@ -146,10 +149,9 @@ namespace ToolDevProject.WPF.ViewModel
             {
                 HeroesRepository = _localHeroesRepository;
             }
-            UpdateFilters();
 
             //no api repository for attributes, since that data isn't available yet on the api
-            //if (AttributesRepository is AttributesLocalRepository)
+            //if (_isApi)
             //{
             //    AttributesRepository = _apiAttributesRepository;
             //}
@@ -157,9 +159,13 @@ namespace ToolDevProject.WPF.ViewModel
             //{
             //    AttributesRepository = _localAttributesRepository;
             //}
-            //LoadAttributeStats();
+
+            LoadHeroes();
+            LoadAttributeStats();
 
             OnPropertyChanged(nameof(SwitchRepoText));
+
+            (MainVM.HeroPage.DataContext as DetailPageVM).SwitchRepositories(_isApi);
         }
 
         //constructor
@@ -176,9 +182,9 @@ namespace ToolDevProject.WPF.ViewModel
             HeroesRepository = _localHeroesRepository;
             AttributesRepository = _localAttributesRepository;
 
+            _isApi = false;
+
             LoadHeroes();
-            LoadAttributes();
-            LoadRoles();
             LoadAttributeStats();
         }
 
@@ -186,15 +192,7 @@ namespace ToolDevProject.WPF.ViewModel
         private async void LoadHeroes()
         {
             Heroes = await HeroesRepository.GetHeroes();
-        }
-
-        private async void LoadAttributes()
-        {
             Attributes = await HeroesRepository.GetAttributes();
-        }
-
-        private async void LoadRoles()
-        {
             Roles = await HeroesRepository.GetRoles();
         }
 

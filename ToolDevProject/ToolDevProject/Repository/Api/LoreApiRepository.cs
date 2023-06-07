@@ -33,7 +33,7 @@ namespace ToolDevProject.WPF.Repository
             {
                 try
                 {
-                    var response = await client.GetAsync("https://api.opendota.com/api/constants/lore");
+                    var response = await client.GetAsync("https://api.opendota.com/api/constants/hero_lore");
 
                     if (!response.IsSuccessStatusCode)
                     {

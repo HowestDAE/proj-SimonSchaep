@@ -24,5 +24,10 @@ namespace ToolDevProject.WPF.View
         {
             InitializeComponent();
         }
+
+        public void ResetPage()
+        {
+            LoreScrollViewer.ScrollToHome();
+        }
     }
 }

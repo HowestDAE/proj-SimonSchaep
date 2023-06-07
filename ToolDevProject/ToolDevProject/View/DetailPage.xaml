@@ -180,7 +180,7 @@
                 </Viewbox>
             </Grid>
             <!--Lore-->
-            <ScrollViewer Grid.Column="1" Padding="0,0,80,0" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer x:Name="LoreScrollViewer" Grid.Column="1" Padding="0,0,80,0" VerticalScrollBarVisibility="Hidden">
             <TextBlock Text="{Binding CurrentHeroLore}"
                        Foreground="White" TextWrapping="Wrap"/>
             </ScrollViewer>

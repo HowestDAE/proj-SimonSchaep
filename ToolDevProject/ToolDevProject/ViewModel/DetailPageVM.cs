@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Animation;
 using ToolDevProject.WPF.Model;
 using ToolDevProject.WPF.Repository;
 using ToolDevProject.WPF.Repository.Api;
@@ -32,23 +33,26 @@ namespace ToolDevProject.WPF.ViewModel
         public MainViewModel MainVM { get; set; }
 
         //data
+        private string _currentHeroLore;
         public string CurrentHeroLore
         {
-            get 
+            get
             {
-                if (CurrentHero.Name == null) return "Name not loaded";
-                return LoreRepository.GetLore(CurrentHero.ActualName); 
+                return _currentHeroLore;
+            }
+            set
+            {
+                SetCurrentHeroLore();
             }
         }
 
         public int CurrentHeroLevel
         {
             get { return CurrentHero.Level; }
-            set 
+            set
             {
                 CurrentHero.Level = value;
 
-                OnPropertyChanged(nameof(CurrentHeroLore));
                 OnPropertyChanged(nameof(CurrentHeroLevel));
                 OnPropertyChanged(nameof(CurrentHero));
                 OnPropertyChanged(nameof(CurrentMeleeHero));
@@ -63,8 +67,10 @@ namespace ToolDevProject.WPF.ViewModel
             set
             {
                 _currentHero = value;
-                OnPropertyChanged(nameof(CurrentHeroLore));
-                OnPropertyChanged(nameof(CurrentHeroLevel));               
+
+                SetCurrentHeroLore();
+
+                OnPropertyChanged(nameof(CurrentHeroLevel));
                 OnPropertyChanged(nameof(CurrentHero));
                 OnPropertyChanged(nameof(CurrentMeleeHero));
                 OnPropertyChanged(nameof(CurrentRangedHero));
@@ -88,6 +94,26 @@ namespace ToolDevProject.WPF.ViewModel
         public void Back()
         {
             MainVM.SwitchPage();
+        }
+
+        //Switch repo
+        public void SwitchRepositories(bool isApi)
+        {
+            if (isApi)
+            {
+                LoreRepository = _apiLoreRepository;
+                ItemsRepository = _apiItemsRepository;
+                ItemPopularitiesRepository = _apiItemPopularitiesRepository;
+            }
+            else
+            {
+                LoreRepository = _localLoreRepository;
+                ItemsRepository = _localItemsRepository;
+                ItemPopularitiesRepository = _localItemPopularitiesRepository;
+            }
+
+            LoadLore();
+            LoadItems();
         }
 
         //constructor
@@ -116,11 +142,27 @@ namespace ToolDevProject.WPF.ViewModel
         private async void LoadLore()
         {
             await LoreRepository.LoadLore();
+
+            OnPropertyChanged(nameof(CurrentHeroLore));
         }
 
         private async void LoadItems()
         {
             await ItemsRepository.LoadItems();
+        }
+
+        private async void SetCurrentHeroLore()
+        {
+            if (CurrentHero.ActualName == null)
+            {
+                _currentHeroLore = "Name not loaded";
+            }
+            else
+            {
+                _currentHeroLore = await LoreRepository.GetLore(CurrentHero.ActualName);
+            }
+
+            OnPropertyChanged(nameof(CurrentHeroLore));
         }
     }
 }
