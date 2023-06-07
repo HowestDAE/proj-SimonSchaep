@@ -43,6 +43,7 @@ namespace ToolDevProject.WPF.Repository.Api
                         List<Tuple<int, int>> list = new List<Tuple<int, int>>();
                         foreach (JProperty property in obj.Properties())
                         {
+                            if (property.Name == "start_game_items") continue; //skip starting items cause those are boring
                             JObject itemObject = (JObject)property.Value;
                             foreach (JProperty childProperty in itemObject.Properties())
                             {

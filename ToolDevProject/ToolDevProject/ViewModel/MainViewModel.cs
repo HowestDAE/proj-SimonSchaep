@@ -37,7 +37,6 @@ namespace ToolDevProject.WPF.ViewModel
 
                 DetailPageVM detail = (HeroPage.DataContext as DetailPageVM);
                 detail.CurrentHero = selectedHero;
-                (HeroPage.DataContext as DetailPageVM).CurrentHero = selectedHero;
                 CurrentPage = HeroPage;
             }
             else

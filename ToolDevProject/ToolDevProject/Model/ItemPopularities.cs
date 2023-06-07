@@ -26,7 +26,7 @@ namespace ToolDevProject.WPF.Model
         public ItemPopularities(List<Tuple<int, int>> items)
         {
             //sort based on popularity
-            items.Sort((itemTuple1, itemTuple2) => itemTuple1.Item2.CompareTo(itemTuple2.Item2));
+            items.Sort((itemTuple1, itemTuple2) => itemTuple2.Item2.CompareTo(itemTuple1.Item2));
 
             ItemIds = new List<int>();
             foreach (var item in items)
