@@ -66,7 +66,7 @@ namespace ToolDevProject.WPF.Repository
             {
                 if ((attribute == "" || attribute == "all" || hero.PrimaryAttribute == attribute) &&
                     (role == "" || role == "all" || hero.Roles.Contains(role)) &&
-                    (nameContains == "" || hero.Name.Contains(nameContains)))
+                    (nameContains == "" || hero.Name.IndexOf(nameContains, StringComparison.OrdinalIgnoreCase) >= 0)) //case insensitive contains: https://stackoverflow.com/questions/444798/case-insensitive-containsstring/444818#444818
                 {
                     filteredHeroes.Add(hero);
                 }
