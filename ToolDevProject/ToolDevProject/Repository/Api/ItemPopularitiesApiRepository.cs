@@ -29,7 +29,7 @@ namespace ToolDevProject.WPF.Repository.Api
                 {
                     try
                     {
-                        var response = await client.GetAsync("https://api.opendota.com/api/constants/items");
+                        var response = await client.GetAsync($"https://api.opendota.com/api/heroes/{heroId}/itemPopularity");
 
                         if (!response.IsSuccessStatusCode)
                         {
