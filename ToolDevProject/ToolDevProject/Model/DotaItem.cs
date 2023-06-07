@@ -10,7 +10,7 @@ namespace ToolDevProject.WPF.Model
     internal class DotaItem
     {
         [JsonProperty(PropertyName = "dname")]
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         private string _imageUrl;
         [JsonProperty(PropertyName = "img")]
