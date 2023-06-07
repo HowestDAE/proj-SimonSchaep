@@ -40,28 +40,28 @@ namespace ToolDevProject.WPF.Repository.Api
 
                         JObject obj = JObject.Parse(json);
 
-                        List<Tuple<int, int>> list = new List<Tuple<int, int>>();
+                        var itemPopularities = new ItemPopularities();
+                        List<Tuple<int, int>> itemsList = new List<Tuple<int, int>>();
                         foreach (JProperty property in obj.Properties())
                         {
-                            if (property.Name == "start_game_items") continue; //skip starting items cause those are boring
+                            string key = property.Name;
                             JObject itemObject = (JObject)property.Value;
                             foreach (JProperty childProperty in itemObject.Properties())
                             {
                                 int itemId = int.Parse(childProperty.Name);
                                 int popularity = childProperty.Value.ToObject<int>();
-                                list.Add(new Tuple<int, int>(itemId, popularity));
+                                itemsList.Add(new Tuple<int, int>(itemId, popularity));
                             }
+                            itemPopularities.SetItems(key, itemsList);
+                            itemsList.Clear();
                         }
 
-                        var itemPopularities = new ItemPopularities(list);
                         _itemPopularities.Add(heroId, itemPopularities);
-
-                        await Task.Delay(1000); //simulate api request delay
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine(ex.Message);
-                        return new ItemPopularities(new List<Tuple<int, int>>());
+                        return new ItemPopularities();
                     }
                 }
             }

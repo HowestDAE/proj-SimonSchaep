@@ -46,12 +46,48 @@ namespace ToolDevProject.WPF.ViewModel
             }
         }
 
-        private List<DotaItem> _currentHeroPopularItems;
-        public List<DotaItem> CurrentHeroPopularItems
+        private List<DotaItem> _currentHeroPopularItemsStart;
+        public List<DotaItem> CurrentHeroPopularItemsStart
         {
             get
             {
-                return _currentHeroPopularItems;
+                return _currentHeroPopularItemsStart;
+            }
+            set
+            {
+                SetCurrentHeroPopularItems();
+            }
+        }
+        private List<DotaItem> _currentHeroPopularItemsEarly;
+        public List<DotaItem> CurrentHeroPopularItemsEarly
+        {
+            get
+            {
+                return _currentHeroPopularItemsEarly;
+            }
+            set
+            {
+                SetCurrentHeroPopularItems();
+            }
+        }
+        private List<DotaItem> _currentHeroPopularItemsMid;
+        public List<DotaItem> CurrentHeroPopularItemsMid
+        {
+            get
+            {
+                return _currentHeroPopularItemsMid;
+            }
+            set
+            {
+                SetCurrentHeroPopularItems();
+            }
+        }
+        private List<DotaItem> _currentHeroPopularItemsLate;
+        public List<DotaItem> CurrentHeroPopularItemsLate
+        {
+            get
+            {
+                return _currentHeroPopularItemsLate;
             }
             set
             {
@@ -188,14 +224,39 @@ namespace ToolDevProject.WPF.ViewModel
 
             var itemPopularities = await ItemPopularitiesRepository.GetItemPopularities(CurrentHero.Id);
 
-            _currentHeroPopularItems = new List<DotaItem>();
-
-            foreach(int id in itemPopularities.ItemIds)
+            //Start
+            _currentHeroPopularItemsStart = new List<DotaItem>();
+            foreach(int id in itemPopularities.GetItems("start_game_items"))
             {
-                _currentHeroPopularItems.Add(await ItemsRepository.GetItem(id));
+                _currentHeroPopularItemsStart.Add(await ItemsRepository.GetItem(id));
             }
 
-            OnPropertyChanged(nameof(CurrentHeroPopularItems));
+            //Early
+            _currentHeroPopularItemsEarly = new List<DotaItem>();
+            foreach (int id in itemPopularities.GetItems("early_game_items"))
+            {
+                _currentHeroPopularItemsEarly.Add(await ItemsRepository.GetItem(id));
+            }
+
+            //Mid
+            _currentHeroPopularItemsMid = new List<DotaItem>();
+            foreach (int id in itemPopularities.GetItems("mid_game_items"))
+            {
+                _currentHeroPopularItemsMid.Add(await ItemsRepository.GetItem(id));
+            }
+
+            //Late
+            _currentHeroPopularItemsLate = new List<DotaItem>();
+            foreach (int id in itemPopularities.GetItems("late_game_items"))
+            {
+                _currentHeroPopularItemsLate.Add(await ItemsRepository.GetItem(id));
+            }
+
+
+            OnPropertyChanged(nameof(CurrentHeroPopularItemsStart));
+            OnPropertyChanged(nameof(CurrentHeroPopularItemsEarly));
+            OnPropertyChanged(nameof(CurrentHeroPopularItemsMid));
+            OnPropertyChanged(nameof(CurrentHeroPopularItemsLate));
         }
     }
 }
