@@ -1,5 +1,5 @@
 Some dota 2 interface
-using the opendata api
+using the opendota api
 https://docs.opendota.com/
 
 It's a game.
