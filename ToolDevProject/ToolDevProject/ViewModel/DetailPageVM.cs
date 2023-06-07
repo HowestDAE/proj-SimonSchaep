@@ -6,15 +6,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToolDevProject.WPF.Model;
+using ToolDevProject.WPF.Repository;
 
 namespace ToolDevProject.WPF.ViewModel
 {
     internal class DetailPageVM : ObservableObject
     {
+        //repos
+        public static ILoreRepository LoreRepository { get; set; }
+
+        private ILoreRepository _localLoreRepository { get; set; }
+        private ILoreRepository _apiLoreRepository { get; set; }
+
         //refs to other VMs
         public MainViewModel MainVM { get; set; }
 
         //data
+        public string CurrentHeroLore
+        {
+            get 
+            {
+                if (CurrentHero.Name == null) return "Name not loaded";
+                return LoreRepository.GetLore(CurrentHero.ActualName); 
+            }
+        }
+
         public int CurrentHeroLevel
         {
             get { return CurrentHero.Level; }
@@ -22,6 +38,7 @@ namespace ToolDevProject.WPF.ViewModel
             {
                 CurrentHero.Level = value;
 
+                OnPropertyChanged(nameof(CurrentHeroLore));
                 OnPropertyChanged(nameof(CurrentHeroLevel));
                 OnPropertyChanged(nameof(CurrentHero));
                 OnPropertyChanged(nameof(CurrentMeleeHero));
@@ -36,7 +53,8 @@ namespace ToolDevProject.WPF.ViewModel
             set
             {
                 _currentHero = value;
-                OnPropertyChanged(nameof(CurrentHeroLevel));
+                OnPropertyChanged(nameof(CurrentHeroLore));
+                OnPropertyChanged(nameof(CurrentHeroLevel));               
                 OnPropertyChanged(nameof(CurrentHero));
                 OnPropertyChanged(nameof(CurrentMeleeHero));
                 OnPropertyChanged(nameof(CurrentRangedHero));
@@ -67,6 +85,18 @@ namespace ToolDevProject.WPF.ViewModel
         {
             CurrentHero = new MeleeHero();
             BackCommand = new RelayCommand(Back);
+
+            _localLoreRepository = new LoreLocalRepository();
+            _apiLoreRepository = new LoreApiRepository();
+
+            LoreRepository = _localLoreRepository;
+
+            LoadLore();
+        }
+
+        private async void LoadLore()
+        {
+            await LoreRepository.LoadLore();
         }
     }
 }

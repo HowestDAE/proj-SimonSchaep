@@ -118,6 +118,8 @@
     <Compile Include="Repository\IItemPopularitiesRepository.cs" />
     <Compile Include="Repository\IItemsRepository.cs" />
     <Compile Include="Repository\ILoreRepository.cs" />
+    <Compile Include="Repository\LoreApiRepository.cs" />
+    <Compile Include="Repository\LoreLocalRepository.cs" />
     <Compile Include="ViewModel\DetailPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OverviewPageVM.cs" />
@@ -175,7 +177,7 @@
     <EmbeddedResource Include="Resources\DataFiles\Heroes.json" />
     <EmbeddedResource Include="Resources\DataFiles\Items.json" />
     <EmbeddedResource Include="Resources\DataFiles\ItemPopularity.json" />
-    <None Include="Resources\DataFiles\Lore.json" />
+    <EmbeddedResource Include="Resources\DataFiles\Lore.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

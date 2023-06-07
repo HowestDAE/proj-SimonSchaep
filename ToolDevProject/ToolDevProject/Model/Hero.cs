@@ -14,6 +14,14 @@ namespace ToolDevProject.WPF.Model
         [JsonProperty(PropertyName = "localized_name")]
         public string Name { get; set; }
 
+        private string _actualName;
+        [JsonProperty(PropertyName = "name")]
+        public string ActualName 
+        {
+            get => _actualName;
+            set => _actualName = value.Substring(("npc_dota_hero_").Length);
+        }
+
         private string _imageUrl;
         [JsonProperty(PropertyName = "img")]
         public string ImageUrl 
