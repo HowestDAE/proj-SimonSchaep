@@ -1,22 +1,57 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository.Api
 {
     internal class ItemsApiRepository : IItemsRepository
     {
-        public Item GetItem(int id)
+        private Dictionary<int, DotaItem> _items;
+
+        public DotaItem GetItem(int id)
         {
-            throw new NotImplementedException();
+            return _items[id];
         }
 
-        public Task LoadItems()
+        public async Task LoadItems()
         {
-            throw new NotImplementedException();
+            if (_items != null) return; //already loaded before
+
+            using (HttpClient client = new HttpClient())
+            {
+                try
+                {
+                    _items = new Dictionary<int, DotaItem>();
+
+                    var response = await client.GetAsync("https://api.opendota.com/api/constants/items");
+
+                    if (!response.IsSuccessStatusCode)
+                    {
+                        throw new HttpRequestException(response.ReasonPhrase);
+                    }
+
+                    string json = await response.Content.ReadAsStringAsync();
+                    
+                    JObject obj = JObject.Parse(json);
+                    foreach (JToken token in obj.Children())
+                    {
+                        int id = token.First().SelectToken("id").ToObject<int>();
+                        _items.Add(id, token.First().ToObject<DotaItem>());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
         }
     }
 }
