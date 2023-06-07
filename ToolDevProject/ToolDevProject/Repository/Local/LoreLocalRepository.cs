@@ -21,7 +21,14 @@ namespace ToolDevProject.WPF.Repository
             {
                 await LoadLore();
             }
-            return _heroLores[heroName];
+            if (!_heroLores.ContainsKey(heroName))
+            {
+                return null;
+            }
+            else
+            {
+                return _heroLores[heroName];
+            }
         }
 
         public async Task LoadLore()

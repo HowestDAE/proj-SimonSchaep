@@ -22,7 +22,14 @@ namespace ToolDevProject.WPF.Repository.Api
             {
                 await LoadItems();
             }
-            return _items[id];
+            if (!_items.ContainsKey(id))
+            {
+                return null;
+            }
+            else
+            {
+                return _items[id];
+            }
         }
 
         public async Task LoadItems()

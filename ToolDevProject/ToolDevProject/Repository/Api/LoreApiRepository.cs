@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using ToolDevProject.WPF.Model;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ToolDevProject.WPF.Repository
 {
@@ -22,7 +23,14 @@ namespace ToolDevProject.WPF.Repository
             {
                 await LoadLore();
             }
-            return _heroLores[heroName];
+            if (!_heroLores.ContainsKey(heroName))
+            {
+                return null;
+            }
+            else
+            {
+                return _heroLores[heroName];
+            }
         }
 
         public async Task LoadLore() //todo: make this use api
