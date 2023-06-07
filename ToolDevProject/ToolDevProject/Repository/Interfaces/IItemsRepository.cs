@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using ToolDevProject.WPF.Model;
 
 namespace ToolDevProject.WPF.Repository
 {
@@ -11,6 +11,6 @@ namespace ToolDevProject.WPF.Repository
     {
         Task LoadItems();
 
-        Item GetItem(int id);
+        DotaItem GetItem(int id);
     }
 }

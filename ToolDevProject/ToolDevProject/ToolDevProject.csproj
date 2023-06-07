@@ -107,9 +107,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Hero.cs" />
-    <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\DotaItem.cs" />
     <Compile Include="Model\ItemPopularities.cs" />
     <Compile Include="Repository\Api\AttributesApiRepository.cs" />
+    <Compile Include="Repository\Api\ItemPopularitiesApiRepository.cs" />
+    <Compile Include="Repository\Api\ItemsApiRepository.cs" />
     <Compile Include="Repository\Local\AttributesLocalRepository.cs" />
     <Compile Include="Repository\Api\HeroesApiRepository.cs" />
     <Compile Include="Repository\Local\HeroesLocalRepository.cs" />
@@ -119,6 +121,8 @@
     <Compile Include="Repository\Interfaces\IItemsRepository.cs" />
     <Compile Include="Repository\Interfaces\ILoreRepository.cs" />
     <Compile Include="Repository\Api\LoreApiRepository.cs" />
+    <Compile Include="Repository\Local\ItemPopularitiesLocalRepository.cs" />
+    <Compile Include="Repository\Local\ItemsLocalRepository.cs" />
     <Compile Include="Repository\Local\LoreLocalRepository.cs" />
     <Compile Include="ViewModel\DetailPageVM.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

@@ -8,8 +8,8 @@ namespace ToolDevProject.WPF.Model
 {
     internal class ItemPopularities
     {
-        private List<Tuple<Item, int>> _items;
-        public List<Tuple<Item, int>> Items
+        private List<Tuple<DotaItem, int>> _items;
+        public List<Tuple<DotaItem, int>> Items
         {
             get
             {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ToolDevProject.WPF.Model
 {
-    internal class Item
+    internal class DotaItem
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
