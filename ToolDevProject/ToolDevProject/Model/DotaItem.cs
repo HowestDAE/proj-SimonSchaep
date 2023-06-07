@@ -9,9 +9,6 @@ namespace ToolDevProject.WPF.Model
 {
     internal class DotaItem
     {
-        [JsonProperty(PropertyName = "id")]
-        public int Id { get; set; }
-
         [JsonProperty(PropertyName = "dname")]
         public int Name { get; set; }
 
