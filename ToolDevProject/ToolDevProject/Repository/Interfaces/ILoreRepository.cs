@@ -10,6 +10,6 @@ namespace ToolDevProject.WPF.Repository
     {
         Task LoadLore();
 
-        string GetLore(string heroName);
+        Task<string> GetLore(string heroName);
     }
 }

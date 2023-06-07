@@ -11,6 +11,6 @@ namespace ToolDevProject.WPF.Repository
     {
         Task LoadItems();
 
-        DotaItem GetItem(int id);
+        Task<DotaItem> GetItem(int id);
     }
 }

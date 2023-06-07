@@ -16,8 +16,12 @@ namespace ToolDevProject.WPF.Repository
     {
         private Dictionary<string, string> _heroLores;
 
-        public string GetLore(string heroName)
+        public async Task<string> GetLore(string heroName)
         {
+            if (_heroLores == null)
+            {
+                await LoadLore();
+            }
             return _heroLores[heroName];
         }
 

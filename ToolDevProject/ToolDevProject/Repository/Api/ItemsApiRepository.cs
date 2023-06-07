@@ -16,8 +16,12 @@ namespace ToolDevProject.WPF.Repository.Api
     {
         private Dictionary<int, DotaItem> _items;
 
-        public DotaItem GetItem(int id)
+        public async Task<DotaItem> GetItem(int id)
         {
+            if (_items == null)
+            {
+                await LoadItems();
+            }
             return _items[id];
         }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace ToolDevProject.WPF.Repository
 {
@@ -14,8 +15,12 @@ namespace ToolDevProject.WPF.Repository
     {
         private Dictionary<string, string> _heroLores;
 
-        public string GetLore(string heroName)
+        public async Task<string> GetLore(string heroName)
         {
+            if (_heroLores == null)
+            {
+                await LoadLore();
+            }
             return _heroLores[heroName];
         }
 
