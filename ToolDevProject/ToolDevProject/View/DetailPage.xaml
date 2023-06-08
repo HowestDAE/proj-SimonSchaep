@@ -182,7 +182,7 @@
             <!--Lore-->
             <ScrollViewer x:Name="LoreScrollViewer" Grid.Column="1" Padding="0,20,80,0" VerticalScrollBarVisibility="Hidden">
             <TextBlock Text="{Binding CurrentHeroLore}"
-                       Foreground="White" TextWrapping="Wrap"/>
+                       Foreground="White" TextWrapping="Wrap" FontSize="14"/>
             </ScrollViewer>
             <!--Popular Items-->
             <Grid Grid.Column="1" Grid.Row="1">
