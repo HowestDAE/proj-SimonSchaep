@@ -1,6 +1,10 @@
 Dota 2 app to see information about all the different heroes.  
 Using the opendota api.  
 https://docs.opendota.com/  
+
+You can see how well each hero's stats scale. Is this hero strong early, or late?
+You can also see some of the most popular items bought on a certain hero.  
+  
 Dota 2 is a game, so I think it fits the DAE / GD profile.  
   
 You can switch between the local and api repository, by pressing the button in the bottom right. This button is only visible on the overview page.  
