@@ -8,12 +8,12 @@ You can switch between the local and api repository, by pressing the button in t
 There are several heroes for which getting their itempopularities results in a bad gateway error.
 Even when pasting the link in a browser.
 List of those heroes:
-anti mage
-clinkz
-dawnbreaker
-earth spirit
-earthshaker
-elder titan
+anti mage 
+clinkz 
+dawnbreaker 
+earth spirit 
+earthshaker 
+elder titan 
 invoker
 io
 lycan
